@@ -8,7 +8,7 @@ import config from "./config.js";
 export default class Resolver {
 
 	async resolve( did ) {
-		const ethrNetworks = config.lac.networks.split( ',' ).map( n => ( {
+		const ethrNetworks = config.ethr.networks.split( ',' ).map( n => ( {
 			name: n.split( '|' )[0],
 			registry: n.split( '|' )[1],
 			rpcUrl: n.split( '|' )[2]
