@@ -31,8 +31,8 @@ if( !process.env.SSL ) {
 		console.log( 'LACChain Universal Resolver | v1.0 HTTP port', port );
 	} );
 } else {
-	const privateKey = fs.readFileSync( 'resolver.key', 'utf8' );
-	const certificate = fs.readFileSync( 'resolver.crt', 'utf8' );
+	const privateKey = fs.readFileSync( process.env.CERT_KEY, 'utf8' );
+	const certificate = fs.readFileSync( process.env.CERT_CRT, 'utf8' );
 	const credentials = { key: privateKey, cert: certificate };
 	const ssl = https.createServer( credentials, app );
 
