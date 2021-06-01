@@ -18,7 +18,7 @@ export default class Resolver {
 			registry: n.split( '|' )[1],
 			rpcUrl: n.split( '|' )[2]
 		} ) );
-		const lacResolver = config.lac.resolve ? lac.getResolver( { networks: lacNetworks } ) : {};
+		const lacResolver = config.lac.resolve ? lac.getResolver( { networks: lacNetworks, mode: 'explicit' } ) : {};
 		const ethrResolver = config.ethr.resolve ? ethr.getResolver( { networks: ethrNetworks } ) : {};
 		const webResolver = config.web.resolve ? web.getResolver() : {};
 
