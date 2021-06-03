@@ -11,7 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@lacchain/did": "latest",
+    "@lacchain/did": "^1.2.0",
     "axios": "^0.21.1",
     "cors": "^2.8.5",
     "did-resolver": "^3.0.1",
