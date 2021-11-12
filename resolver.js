@@ -18,19 +18,12 @@ export default class Resolver {
 			registry: n.split( '|' )[1],
 			rpcUrl: n.split( '|' )[2]
 		} ) );
-		const lacDavid19Networks = config.david19.networks.split( ',' ).map( n => ( {
-			name: n.split( '|' )[0],
-			registry: n.split( '|' )[1],
-			rpcUrl: n.split( '|' )[2]
-		} ) );
 		const lacResolver = config.lac.resolve ? lac.getResolver( { networks: lacNetworks, mode: 'explicit' } ) : {};
-		const lacDavid19Resolver = config.david19.resolve ? lac.getResolver( { networks: lacDavid19Networks, mode: 'explicit' } ) : {};
 		const ethrResolver = config.ethr.resolve ? ethr.getResolver( { networks: ethrNetworks } ) : {};
 		const webResolver = config.web.resolve ? web.getResolver() : {};
 
 		const resolver = new DIDResolver.Resolver( {
 			...lacResolver,
-			...lacDavid19Resolver,
 			...ethrResolver,
 			...webResolver,
 			...config.btcr.resolve ? {
