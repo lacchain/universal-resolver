@@ -13,11 +13,16 @@ export default class Resolver {
 			registry: n.split( '|' )[1],
 			rpcUrl: n.split( '|' )[2]
 		} ) );
-		const lacNetworks = config.lac.networks.split( ',' ).map( n => ( {
-			name: n.split( '|' )[0],
-			registry: n.split( '|' )[1],
-			rpcUrl: n.split( '|' )[2]
-		} ) );
+		const lacNetworks = config.lac.networks.split( ',' ).map( node => {
+			const split = node.split('|');
+			return {
+				name: split[0],
+				registry: split[1],
+				rpcUrl: split[2],
+				nodeAddress: split.length > 3 ? split[3] : undefined,
+				expiration: split.length > 4 ? split[4] : undefined,
+			}
+		} );
 		const lacResolver = config.lac.resolve ? lac.getResolver( { networks: lacNetworks, mode: 'explicit' } ) : {};
 		const ethrResolver = config.ethr.resolve ? ethr.getResolver( { networks: ethrNetworks } ) : {};
 		const webResolver = config.web.resolve ? web.getResolver() : {};
