@@ -2,11 +2,11 @@ import express from 'express';
 import http from 'http';
 import https from "https";
 import cors from 'cors';
-import Resolver from "./resolver.js";
+import ResolverDID from "./resolver.js";
 import fs from "fs";
 
 const app = express();
-const resolver = new Resolver();
+const resolver = new ResolverDID();
 
 app.use( cors() );
 app.use( express.json( { limit: 152428800 } ) );

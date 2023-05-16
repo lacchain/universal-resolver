@@ -11,12 +11,12 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@lacchain/did": "^1.4.7",
-    "axios": "^0.21.1",
-    "cors": "^2.8.5",
-    "did-resolver": "^3.0.1",
-    "ethr-did-resolver": "^3.0.3",
-    "express": "^4.17.1",
-    "web-did-resolver": "^1.3.5"
+    "@lacchain/did": "1.4.6",
+    "axios": "0.21.1",
+    "cors": "2.8.5",
+    "did-resolver": "3.0.1",
+    "ethr-did-resolver": "3.0.3",
+    "express": "4.17.1",
+    "web-did-resolver": "1.3.5"
   }
 }

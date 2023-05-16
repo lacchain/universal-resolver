@@ -5,7 +5,7 @@ import web from 'web-did-resolver';
 import DIDResolver from 'did-resolver';
 import config from "./config.js";
 
-export default class Resolver {
+export default class ResolverDID {
 
 	async resolve( did ) {
 		const ethrNetworks = config.ethr.networks.split( ',' ).map( n => ( {
@@ -23,45 +23,45 @@ export default class Resolver {
 				expiration: split.length > 4 ? split[4] : undefined,
 			}
 		} );
-		const lacResolver = config.lac.resolve ? lac.getResolver( { networks: lacNetworks, mode: 'explicit' } ) : {};
+		const lacResolver = config.lac.resolve ? lac( { networks: lacNetworks, mode: 'explicit' } ) : {};
 		const ethrResolver = config.ethr.resolve ? ethr.getResolver( { networks: ethrNetworks } ) : {};
 		const webResolver = config.web.resolve ? web.getResolver() : {};
 
-		const resolver = new DIDResolver.Resolver( {
-			...lacResolver,
-			...ethrResolver,
-			...webResolver,
-			...config.btcr.resolve ? {
-				btcr: async( did, parsed ) => {
-					const didDoc = await axios.get( `${config.btcr.endpoint}/${parsed.did}` );
-					return didDoc.data;
-				}
-			} : {},
-			...config.sov.resolve ? {
-				sov: async( did, parsed ) => {
-					const didDoc = await axios.get( `${config.sov.endpoint}/${parsed.did}` );
-					return didDoc.data;
-				}
-			} : {},
-			...config.nacl.resolve ? {
-				nacl: async( did, parsed ) => {
-					const didDoc = await axios.get( `${config.nacl.endpoint}/${parsed.did}` );
-					return didDoc.data;
-				}
-			} : {},
-			...config.elem.resolve ? {
-				elem: async( did, parsed ) => {
-					const didDoc = await axios.get( `${config.elem.endpoint}/${parsed.did}` );
-					return didDoc.data;
-				}
-			} : {},
-			...config.elsi.resolve ? {
-				elsi: async( did, parsed ) => {
-					const didDoc = await axios.get( `${config.elsi.endpoint}/${parsed.did}` );
-					return didDoc.data.payload;
-				}
-			} : {}
-		} );
+		const resolver = new DIDResolver.Resolver(  {
+				...lacResolver,
+				...ethrResolver,
+				...webResolver,
+				...config.btcr.resolve ? {
+					btcr: async( did, parsed ) => {
+						const didDoc = await axios.get( `${config.btcr.endpoint}/${parsed.did}` );
+						return didDoc.data;
+					}
+				} : {},
+				...config.sov.resolve ? {
+					sov: async( did, parsed ) => {
+						const didDoc = await axios.get( `${config.sov.endpoint}/${parsed.did}` );
+						return didDoc.data;
+					}
+				} : {},
+				...config.nacl.resolve ? {
+					nacl: async( did, parsed ) => {
+						const didDoc = await axios.get( `${config.nacl.endpoint}/${parsed.did}` );
+						return didDoc.data;
+					}
+				} : {},
+				...config.elem.resolve ? {
+					elem: async( did, parsed ) => {
+						const didDoc = await axios.get( `${config.elem.endpoint}/${parsed.did}` );
+						return didDoc.data;
+					}
+				} : {},
+				...config.elsi.resolve ? {
+					elsi: async( did, parsed ) => {
+						const didDoc = await axios.get( `${config.elsi.endpoint}/${parsed.did}` );
+						return didDoc.data.payload;
+					}
+				} : {}
+			});
 		return await resolver.resolve( did );
 	}
 
