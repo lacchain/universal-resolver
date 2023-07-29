@@ -27,5 +27,9 @@ export default {
 	"lac": {
 		"resolve": process.env.DID_LAC_ENABLED || false,
 		"networks": process.env.DID_LAC_NETWORKS || ""
+	},
+	"lac1": {
+		"resolve": process.env.DID_LAC1_ENABLED || false,
+		"networks": process.env.DID_LAC1_NETWORKS || ""
 	}
 }
