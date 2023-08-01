@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { Resolver as lac } from '@lacchain/did';
+import { Resolver as lac, Lac1Resolver as lac1 } from '@lacchain/did';
 import ethr from 'ethr-did-resolver';
 import web from 'web-did-resolver';
 import DIDResolver from 'did-resolver';
@@ -23,12 +23,23 @@ export default class ResolverDID {
 				expiration: split.length > 4 ? split[4] : undefined,
 			}
 		} );
+		const lac1Networks = config.lac1.networks.split( ',' ).map( node => {
+			const split = node.split('|');
+			return {
+				registry: split[0],
+				rpcUrl: split[1],
+				nodeAddress: split.length > 2 ? split[2] : undefined,
+				chainId: split.length > 3 ? parseInt(split[3]) : undefined,
+			}
+		} );
 		const lacResolver = config.lac.resolve ? lac( { networks: lacNetworks, mode: 'explicit' } ) : {};
+		const lac1Resolver = config.lac1.resolve ? lac1( { networks: lac1Networks, mode: 'explicit' } ) : {};
 		const ethrResolver = config.ethr.resolve ? ethr.getResolver( { networks: ethrNetworks } ) : {};
 		const webResolver = config.web.resolve ? web.getResolver() : {};
 
 		const resolver = new DIDResolver.Resolver(  {
-				...lacResolver,
+				...lacResolver,    
+				...lac1Resolver,
 				...ethrResolver,
 				...webResolver,
 				...config.btcr.resolve ? {

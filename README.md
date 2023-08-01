@@ -11,6 +11,7 @@ Currently, these are the following supported DID methods:
 | lac                            |     LACChain                |  MainNet   |
 | ethr                           |     LACChain                |  MainNet   |
 | ethr                           |     Ethereum                |     *      |
+| lac1                           |     LACChain                |  MainNet   |
 | web                            |      *                      |     *      |
 | btcr                           |      *                      |     *      |
 | sov                            |      *                      |     *      |
